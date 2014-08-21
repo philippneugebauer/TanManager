@@ -11,24 +11,24 @@ import javax.xml.validation.Validator;
 
 import org.xml.sax.SAXException;
 
-public class XMLValidierung {
-	public XMLValidierung() {
+public class XMLValidator {
 
+	private Validator validator;
+
+	{
+		SchemaFactory schemaFactory = SchemaFactory
+				.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Schema schema = null;
+		try {
+			schema = schemaFactory.newSchema(XMLValidator.class
+					.getResource("schema/schema1.xsd"));
+		} catch (SAXException e) {
+			// ignore
+		}
+		validator = schema.newValidator();
 	}
 
-	public void validiereXMLDatei(File file) throws SAXException, IOException {
-
-		SchemaFactory sf = SchemaFactory
-				.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-		Schema schema = null;
-		schema = sf.newSchema(XMLValidierung.class
-				.getResource("schema/schema1.xsd"));
-		/*
-		 * setzt das generierte Schema als Überprüfungsschema fest
-		 */
-		Validator validator = schema.newValidator();
+	public void validateXmlFile(File file) throws SAXException, IOException {
 		validator.validate(new StreamSource(file));
-
 	}
 }
