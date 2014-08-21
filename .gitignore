@@ -9,3 +9,5 @@
 .gradle/*
 .settings/*
 build/*
+.project
+.classpath
