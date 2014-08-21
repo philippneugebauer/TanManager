@@ -12,25 +12,25 @@ import org.xml.sax.SAXException;
 import de.uniba.ppn.tananzeiger.logik.TANSpeicher;
 
 public class XMLReader {
-	XMLValidierung validierer = null;
 
-	public XMLReader() {
-		validierer = new XMLValidierung();
+	XMLValidator validator;
+	Unmarshaller unmarshaller;
+
+	{
+		validator = new XMLValidator();
+		try {
+			JAXBContext context = JAXBContext.newInstance(TANSpeicher.class);
+			unmarshaller = context.createUnmarshaller();
+		} catch (JAXBException e) {
+			// ignore
+		}
 	}
 
-	public TANSpeicher leseTAN(File file) throws JAXBException,
+	public TANSpeicher readTanXml(File file) throws JAXBException,
 			SAXException, IOException {
+		TANSpeicher tanList = (TANSpeicher) unmarshaller.unmarshal(file);
+		validator.validateXmlFile(file);
 
-		JAXBContext context = null;
-		context = JAXBContext.newInstance(TANSpeicher.class);
-		Unmarshaller um = null;
-		um = context.createUnmarshaller();
-
-		TANSpeicher tanListe = null;
-		tanListe = (TANSpeicher) um.unmarshal(file);
-
-		validierer.validiereXMLDatei(file);
-
-		return tanListe;
+		return tanList;
 	}
 }
