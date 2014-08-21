@@ -16,8 +16,8 @@ public class FileChooser extends JFileChooser {
 
 	public File chooseFile(JMenuItem load) {
 		choice = fileChooser.showOpenDialog(load);
-		fileChooser.setDialogTitle("Bitte w‰hlen Sie eine Datei aus");
-		// falls der Nutzer eine Auswahl getroffen hat:
+		fileChooser.setDialogTitle("Bitte w√§hlen Sie eine Datei aus");
+
 		if (choice == JFileChooser.APPROVE_OPTION) {
 			toLoad = fileChooser.getSelectedFile();
 		}
