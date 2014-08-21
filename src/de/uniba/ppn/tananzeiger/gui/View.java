@@ -29,7 +29,7 @@ public class View extends JFrame implements Observer {
 	private Controller controller = null;
 	private JMenuItem kopieren = new JMenuItem("Kopiere TAN");
 	private JMenuItem about = null;
-	private JButton nächsteTAN = null;
+	private JButton nÃ¤chsteTAN = null;
 	private JPopupMenu popupMenu = null;
 	private JMenuItem popupCopy = null;
 	private JTextField restlicheTANAnzahl = null;
@@ -51,6 +51,7 @@ public class View extends JFrame implements Observer {
 		initButtons();
 		initTextFields();
 		einlesen.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.chooseFile();
 			}
@@ -58,6 +59,7 @@ public class View extends JFrame implements Observer {
 		});
 
 		kopieren.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Toolkit.getDefaultToolkit()
 						.getSystemClipboard()
@@ -68,6 +70,7 @@ public class View extends JFrame implements Observer {
 		});
 
 		about.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane
 						.showMessageDialog(
@@ -77,12 +80,14 @@ public class View extends JFrame implements Observer {
 			}
 		});
 
-		nächsteTAN.addActionListener(new ActionListener() {
+		nÃ¤chsteTAN.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.getNextTAN();
 			}
 		});
 		popupCopy.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Toolkit.getDefaultToolkit()
 						.getSystemClipboard()
@@ -93,6 +98,7 @@ public class View extends JFrame implements Observer {
 		});
 
 		this.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseReleased(MouseEvent popup) {
 				if (popup.isPopupTrigger()) {
 					popupMenu.show(popup.getComponent(), popup.getX(),
@@ -107,14 +113,14 @@ public class View extends JFrame implements Observer {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(new Rectangle(0, 0, 300, 20));
 		einlesen = new JMenuItem("Laden");
-		JMenu menu = new JMenu("Menü");
+		JMenu menu = new JMenu("Menï¿½");
 		menuBar.add(menu);
 		menu.add(einlesen);
 		kopieren = new JMenuItem("Kopiere TAN");
 		menu.add(kopieren);
 		JMenu help = new JMenu("?");
 		menuBar.add(help);
-		about = new JMenuItem("Über");
+		about = new JMenuItem("Ãœber");
 		help.add(about);
 		add(menuBar);
 		popupMenu = new JPopupMenu();
@@ -124,16 +130,16 @@ public class View extends JFrame implements Observer {
 	}
 
 	private void initButtons() {
-		nächsteTAN = new JButton("Nächste TAN");
-		nächsteTAN.setBounds(new Rectangle(70, 110, 150, 30));
-		add(nächsteTAN);
+		nÃ¤chsteTAN = new JButton("NÃ¤chste TAN");
+		nÃ¤chsteTAN.setBounds(new Rectangle(70, 110, 150, 30));
+		add(nÃ¤chsteTAN);
 	}
 
 	private void initLabels() {
 		JLabel TanAnzeigeLabel = new JLabel("TAN:");
 		TanAnzeigeLabel.setBounds(new Rectangle(80, 52, 30, 10));
 		add(TanAnzeigeLabel);
-		JLabel restlicheTanLabel = new JLabel("übrige TANs:");
+		JLabel restlicheTanLabel = new JLabel("Ã¼brige TANs:");
 		restlicheTanLabel.setBounds(new Rectangle(80, 75, 80, 15));
 		add(restlicheTanLabel);
 	}

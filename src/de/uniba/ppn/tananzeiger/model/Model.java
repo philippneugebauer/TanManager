@@ -37,7 +37,7 @@ public class Model extends Observable {
 		this.speicher = loadSpeicher;
 	}
 
-	public void löscheTan() throws JAXBException {
+	public void lÃ¶scheTan() throws JAXBException {
 		speicher.remove(0);
 		schreibeXML();
 	}

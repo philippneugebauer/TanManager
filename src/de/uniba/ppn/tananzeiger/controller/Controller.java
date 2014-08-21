@@ -98,9 +98,9 @@ public class Controller {
 	public void getNextTAN() {
 		if (model.getSize() > 1) {
 			try {
-				löscheTan();
+				lÃ¶scheTan();
 			} catch (JAXBException e1) {
-				anzeige.showException("Die TAN konnte nicht gelöscht werden!");
+				anzeige.showException("Die TAN konnte nicht gelï¿½scht werden!");
 			}
 			anzeige.getTanAnzeige().setText(
 					String.valueOf(model.getList().get(0)));
@@ -111,9 +111,9 @@ public class Controller {
 			}
 		} else if (model.getSize() == 1) {
 			try {
-				löscheTan();
+				lÃ¶scheTan();
 			} catch (JAXBException e1) {
-				anzeige.showException("Die TAN konnte nicht gelöscht werden!");
+				anzeige.showException("Die TAN konnte nicht gelï¿½scht werden!");
 			}
 			anzeige.getTanAnzeige().setText("TANs leer");
 			anzeige.getRestlicheTanAnzahl().setText("0");
@@ -149,8 +149,8 @@ public class Controller {
 		model.speichereTAN(speicher);
 	}
 
-	public void löscheTan() throws JAXBException {
-		model.löscheTan();
+	public void lÃ¶scheTan() throws JAXBException {
+		model.lÃ¶scheTan();
 	}
 
 	public ArrayList<String> getList() {
