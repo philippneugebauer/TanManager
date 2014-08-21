@@ -8,30 +8,27 @@ import java.util.ArrayList;
 
 public class TextReader {
 	BufferedReader reader = null;
-	ArrayList<String> speicher = new ArrayList<String>();
-
-	public TextReader() {
-	}
+	ArrayList<String> textStorage = new ArrayList<String>();
 
 	public ArrayList<String> readFile(File file) throws IOException {
-		speicher.clear();
+		textStorage.clear();
 		reader = new BufferedReader(new FileReader(file));
-		String zeilenSpeicher = null;
-		while ((zeilenSpeicher = reader.readLine()) != null) {
-			boolean isZahl = false;
+		String lineStorage = null;
+		while ((lineStorage = reader.readLine()) != null) {
+			boolean isNumber = false;
 			try {
-				zeilenSpeicher = zeilenSpeicher.trim();
-				Long.parseLong(zeilenSpeicher);
-				isZahl = true;
+				lineStorage = lineStorage.trim();
+				Long.parseLong(lineStorage);
+				isNumber = true;
 			} catch (NumberFormatException e) {
-				isZahl = false;
+				isNumber = false;
 			} finally {
-				if (isZahl == true) {
-					speicher.add(zeilenSpeicher);
+				if (isNumber == true) {
+					textStorage.add(lineStorage);
 				}
 			}
 		}
 		reader.close();
-		return speicher;
+		return textStorage;
 	}
 }
