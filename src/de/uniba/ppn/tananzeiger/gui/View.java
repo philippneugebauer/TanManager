@@ -21,26 +21,27 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 
 import de.uniba.ppn.tananzeiger.controller.Controller;
+import de.uniba.ppn.tananzeiger.model.Model;
 
 public class View extends JFrame implements Observer {
-	private JMenuItem einlesen = null;
-	private JTextField TanAnzeigeFeld = null;
+	private JMenuItem readMenu = null;
+	private JTextField tanShowField = null;
 	@SuppressWarnings("unused")
 	private Controller controller = null;
-	private JMenuItem kopieren = new JMenuItem("Kopiere TAN");
+	private Model model;
+	private JMenuItem copyTanButton = new JMenuItem("Kopiere TAN");
 	private JMenuItem about = null;
-	private JButton nächsteTAN = null;
+	private JButton nextTanButton = null;
 	private JPopupMenu popupMenu = null;
 	private JMenuItem popupCopy = null;
-	private JTextField restlicheTANAnzahl = null;
-	/**
-	 * 
-	 */
+	private JTextField remainingTanCountField = null;
+
 	private static final long serialVersionUID = 1L;
 
-	public View(final Controller controller) {
+	public View(final Controller controller, Model model) {
 		super("Tan-Anzeiger");
 		this.controller = controller;
+		this.model = model;
 		setSize(300, 200);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
@@ -50,7 +51,7 @@ public class View extends JFrame implements Observer {
 		initLabels();
 		initButtons();
 		initTextFields();
-		einlesen.addActionListener(new ActionListener() {
+		readMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.chooseFile();
@@ -58,13 +59,13 @@ public class View extends JFrame implements Observer {
 
 		});
 
-		kopieren.addActionListener(new ActionListener() {
+		copyTanButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Toolkit.getDefaultToolkit()
 						.getSystemClipboard()
 						.setContents(
-								new StringSelection(TanAnzeigeFeld.getText()),
+								new StringSelection(tanShowField.getText()),
 								null);
 			}
 		});
@@ -80,7 +81,7 @@ public class View extends JFrame implements Observer {
 			}
 		});
 
-		nächsteTAN.addActionListener(new ActionListener() {
+		nextTanButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.getNextTAN();
@@ -92,7 +93,7 @@ public class View extends JFrame implements Observer {
 				Toolkit.getDefaultToolkit()
 						.getSystemClipboard()
 						.setContents(
-								new StringSelection(TanAnzeigeFeld.getText()),
+								new StringSelection(tanShowField.getText()),
 								null);
 			}
 		});
@@ -112,12 +113,12 @@ public class View extends JFrame implements Observer {
 	private void initMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(new Rectangle(0, 0, 300, 20));
-		einlesen = new JMenuItem("Laden");
-		JMenu menu = new JMenu("Men�");
+		readMenu = new JMenuItem("Laden");
+		JMenu menu = new JMenu("Menü");
 		menuBar.add(menu);
-		menu.add(einlesen);
-		kopieren = new JMenuItem("Kopiere TAN");
-		menu.add(kopieren);
+		menu.add(readMenu);
+		copyTanButton = new JMenuItem("Kopiere TAN");
+		menu.add(copyTanButton);
 		JMenu help = new JMenu("?");
 		menuBar.add(help);
 		about = new JMenuItem("Über");
@@ -130,9 +131,9 @@ public class View extends JFrame implements Observer {
 	}
 
 	private void initButtons() {
-		nächsteTAN = new JButton("Nächste TAN");
-		nächsteTAN.setBounds(new Rectangle(70, 110, 150, 30));
-		add(nächsteTAN);
+		nextTanButton = new JButton("Nächste TAN");
+		nextTanButton.setBounds(new Rectangle(70, 110, 150, 30));
+		add(nextTanButton);
 	}
 
 	private void initLabels() {
@@ -145,27 +146,19 @@ public class View extends JFrame implements Observer {
 	}
 
 	private void initTextFields() {
-		TanAnzeigeFeld = new JTextField();
-		TanAnzeigeFeld.setHorizontalAlignment(JTextField.RIGHT);
-		TanAnzeigeFeld.setBounds(new Rectangle(110, 47, 100, 20));
-		TanAnzeigeFeld.setEditable(false);
-		add(TanAnzeigeFeld);
-		restlicheTANAnzahl = new JTextField();
-		restlicheTANAnzahl.setHorizontalAlignment(JTextField.RIGHT);
-		restlicheTANAnzahl.setBounds(new Rectangle(160, 72, 50, 20));
-		restlicheTANAnzahl.setEditable(false);
-		add(restlicheTANAnzahl);
+		tanShowField = new JTextField("TANs leer");
+		tanShowField.setHorizontalAlignment(JTextField.RIGHT);
+		tanShowField.setBounds(new Rectangle(110, 47, 100, 20));
+		tanShowField.setEditable(false);
+		add(tanShowField);
+		remainingTanCountField = new JTextField("0");
+		remainingTanCountField.setHorizontalAlignment(JTextField.RIGHT);
+		remainingTanCountField.setBounds(new Rectangle(160, 72, 50, 20));
+		remainingTanCountField.setEditable(false);
+		add(remainingTanCountField);
 	}
 
-	public JTextField getTanAnzeige() {
-		return TanAnzeigeFeld;
-	}
-
-	public JTextField getRestlicheTanAnzahl() {
-		return restlicheTANAnzahl;
-	}
-
-	public void showWarning(String warning) {
+	private void showWarning(String warning) {
 		JOptionPane.showMessageDialog(null, warning, "Achtung",
 				JOptionPane.WARNING_MESSAGE);
 	}
@@ -177,7 +170,14 @@ public class View extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
+		remainingTanCountField.setText(String.valueOf(model.getSize()));
+		if (model.getSize() > 0) {
+			tanShowField.setText(String.valueOf(model.getList().get(0)));
+			if (model.getSize() == 1) {
+				showWarning("Das ist ihre letzte TAN!");
+			}
+		} else {
+			tanShowField.setText("TANs leer");
+		}
 	}
 }
