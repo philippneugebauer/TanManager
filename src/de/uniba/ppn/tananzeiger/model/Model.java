@@ -7,71 +7,63 @@ import java.util.Observable;
 
 import javax.xml.bind.JAXBException;
 
+import org.xml.sax.SAXException;
+
 import de.uniba.ppn.tananzeiger.logik.TANSpeicher;
 import de.uniba.ppn.tananzeiger.logik.TextReader;
 import de.uniba.ppn.tananzeiger.xml.XMLReader;
 import de.uniba.ppn.tananzeiger.xml.XMLWriter;
 
 public class Model extends Observable {
-	private TANSpeicher liste = null;
-	private ArrayList<String> speicher = new ArrayList<String>();
-	private File file = null;
-	private XMLWriter writer = null;
-	private TextReader reader = null;
-	private XMLReader XMLreader = null;
+	private TANSpeicher tanList;
+	private File file;
+	private XMLWriter writer;
+	private TextReader reader;
+	private XMLReader xmlReader;
 
 	public Model(File file) {
 		this.file = file;
-		liste = new TANSpeicher();
+		tanList = new TANSpeicher();
 		writer = new XMLWriter();
 		reader = new TextReader();
-		XMLreader = new XMLReader();
+		xmlReader = new XMLReader();
 	}
 
 	public ArrayList<String> getList() {
-		return speicher;
+		return tanList.getTanSpeicher();
 	}
 
-	public void speichereTAN(ArrayList<String> loadSpeicher) {
-		liste.setTanSpeicher(loadSpeicher);
-		this.speicher = loadSpeicher;
+	public void deleteTan() throws JAXBException {
+		getList().remove(0);
+		this.setChanged();
+		this.notifyObservers();
+		writeXml();
 	}
 
-	public void löscheTan() throws JAXBException {
-		speicher.remove(0);
-		schreibeXML();
+	public void readXml() throws JAXBException, SAXException, IOException {
+		this.tanList = xmlReader.readTanXml(file);
+		this.setChanged();
+		this.notifyObservers();
 	}
 
-	public void readXML() throws Exception {
-		try {
-			this.liste = XMLreader.leseTAN(file);
-			this.speicher = liste.getTanSpeicher();
-		} catch (Exception e) {
-			throw new Exception("Die Datei konnte nicht geladen werden!");
-		}
+	public void loadXML(File file) throws JAXBException, SAXException,
+			IOException {
+		readXml();
+		writeXml();
 	}
 
-	public void loadXML(File file) throws Exception {
-		try {
-			this.liste = XMLreader.leseTAN(file);
-			this.speicher = liste.getTanSpeicher();
-			schreibeXML();
-		} catch (Exception e) {
-			throw new Exception("Die Datei konnte nicht geladen werden!");
-		}
-	}
-
-	public void schreibeXML() throws JAXBException {
-		writer.schreibeTans(liste, file);
+	public void writeXml() throws JAXBException {
+		writer.writeTanXml(tanList, file);
 	}
 
 	public int getSize() {
-		return speicher.size();
+		return getList().size();
 	}
 
 	public void readFile(File file) throws IOException, JAXBException {
-		this.speicher = reader.readFile(file);
-		liste.setTanSpeicher(speicher);
-		schreibeXML();
+		tanList.setTanSpeicher(reader.readFile(file));
+		this.setChanged();
+		this.notifyObservers();
+		writeXml();
 	}
 }
