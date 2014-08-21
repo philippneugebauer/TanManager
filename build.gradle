@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'de.uniba.ppn.tananzeiger.Main'
+    }
+    baseName = 'tananzeiger'
+}
+
+sourceSets.main.resources.srcDir 'src/main/java'
