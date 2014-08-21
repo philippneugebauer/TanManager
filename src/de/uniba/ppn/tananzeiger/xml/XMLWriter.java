@@ -5,32 +5,25 @@ import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
 
 import de.uniba.ppn.tananzeiger.logik.TANSpeicher;
 
 public class XMLWriter {
-	public XMLWriter() {
 
+	private Marshaller marshaller;
+
+	{
+		try {
+			JAXBContext context = JAXBContext.newInstance(TANSpeicher.class);
+			marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		} catch (JAXBException e) {
+			// ignore
+		}
 	}
 
-	public void schreibeTans(TANSpeicher tanListe, File file)
+	public void writeTanXml(TANSpeicher tanListe, File file)
 			throws JAXBException {
-
-		JAXBContext context = null;
-		context = JAXBContext.newInstance(TANSpeicher.class);
-
-		Marshaller ms = null;
-		ms = context.createMarshaller();
-
-		try {
-			ms.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		} catch (PropertyException e) {
-			System.out
-					.println("Eine Eigenschaft des XML-Lesers wurde falsch gesetzt!");
-		}
-
-		ms.marshal(tanListe, file);
-
+		marshaller.marshal(tanListe, file);
 	}
 }
