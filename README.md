@@ -1,7 +1,7 @@
 Tan-Anzeiger
 ============
 
-Project for simplifying the bureaucracy staff at university.
+Project for simplifying the bureaucracy stuff at university.
 
 Collects and deletes tans used for that.
 
