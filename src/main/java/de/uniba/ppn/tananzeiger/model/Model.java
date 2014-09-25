@@ -14,6 +14,11 @@ import de.uniba.ppn.tananzeiger.logik.TextReader;
 import de.uniba.ppn.tananzeiger.xml.XMLReader;
 import de.uniba.ppn.tananzeiger.xml.XMLWriter;
 
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 Philipp Neugebauer
+ */
 public class Model extends Observable {
 	private TANSpeicher tanList;
 	private File file;
@@ -47,7 +52,7 @@ public class Model extends Observable {
 	}
 
 	public void loadXML(File file) throws JAXBException, SAXException,
-			IOException {
+	IOException {
 		readXml();
 		writeXml();
 	}

@@ -23,6 +23,11 @@ import javax.swing.JTextField;
 import de.uniba.ppn.tananzeiger.controller.Controller;
 import de.uniba.ppn.tananzeiger.model.Model;
 
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 Philipp Neugebauer
+ */
 public class View extends JFrame implements Observer {
 	private JMenuItem readMenu = null;
 	private JTextField tanShowField = null;
@@ -63,10 +68,10 @@ public class View extends JFrame implements Observer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Toolkit.getDefaultToolkit()
-						.getSystemClipboard()
-						.setContents(
-								new StringSelection(tanShowField.getText()),
-								null);
+				.getSystemClipboard()
+				.setContents(
+						new StringSelection(tanShowField.getText()),
+						null);
 			}
 		});
 
@@ -74,10 +79,10 @@ public class View extends JFrame implements Observer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane
-						.showMessageDialog(
-								null,
-								"Autor: Philipp Neugebauer \nVersion: 1.1 \nBugs bitte an flippus@nexgo.de melden!",
-								"Autor", 1);
+				.showMessageDialog(
+						null,
+						"Autor: Philipp Neugebauer \nVersion: 1.1 \nBugs bitte an flippus@nexgo.de melden!",
+						"Autor", 1);
 			}
 		});
 
@@ -91,10 +96,10 @@ public class View extends JFrame implements Observer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Toolkit.getDefaultToolkit()
-						.getSystemClipboard()
-						.setContents(
-								new StringSelection(tanShowField.getText()),
-								null);
+				.getSystemClipboard()
+				.setContents(
+						new StringSelection(tanShowField.getText()),
+						null);
 			}
 		});
 

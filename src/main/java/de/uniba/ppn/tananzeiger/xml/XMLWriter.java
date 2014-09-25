@@ -8,6 +8,11 @@ import javax.xml.bind.Marshaller;
 
 import de.uniba.ppn.tananzeiger.logik.TANSpeicher;
 
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 Philipp Neugebauer
+ */
 public class XMLWriter {
 
 	private Marshaller marshaller;

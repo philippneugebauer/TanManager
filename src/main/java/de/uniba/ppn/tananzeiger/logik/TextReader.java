@@ -6,6 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 Philipp Neugebauer
+ */
 public class TextReader {
 	BufferedReader reader = null;
 	ArrayList<String> textStorage = new ArrayList<String>();

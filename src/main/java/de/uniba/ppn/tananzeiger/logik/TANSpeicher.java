@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 Philipp Neugebauer
+ */
 @XmlRootElement(name = "Module", namespace = "http://uniba.de/ppn/tananzeiger")
 public class TANSpeicher {
 	private ArrayList<String> tanSpeicher = new ArrayList<String>();

@@ -5,6 +5,11 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 Philipp Neugebauer
+ */
 public class FileChooser extends JFileChooser {
 	private static final long serialVersionUID = 1L;
 	int choice = 0;

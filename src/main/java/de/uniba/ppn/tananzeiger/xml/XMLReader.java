@@ -11,6 +11,11 @@ import org.xml.sax.SAXException;
 
 import de.uniba.ppn.tananzeiger.logik.TANSpeicher;
 
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 Philipp Neugebauer
+ */
 public class XMLReader {
 
 	XMLValidator validator;
@@ -27,7 +32,7 @@ public class XMLReader {
 	}
 
 	public TANSpeicher readTanXml(File file) throws JAXBException,
-			SAXException, IOException {
+	SAXException, IOException {
 		TANSpeicher tanList = (TANSpeicher) unmarshaller.unmarshal(file);
 		validator.validateXmlFile(file);
 

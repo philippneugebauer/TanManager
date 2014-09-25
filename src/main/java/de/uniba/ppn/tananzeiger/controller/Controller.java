@@ -11,6 +11,11 @@ import de.uniba.ppn.tananzeiger.gui.FileChooser;
 import de.uniba.ppn.tananzeiger.gui.View;
 import de.uniba.ppn.tananzeiger.model.Model;
 
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 Philipp Neugebauer
+ */
 public class Controller {
 	private File file = null;
 	private View view = null;
