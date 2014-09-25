@@ -12,5 +12,3 @@ jar {
     }
     baseName = 'tananzeiger'
 }
-
-sourceSets.main.resources.srcDir 'src/main/java'

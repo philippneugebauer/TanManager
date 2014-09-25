@@ -25,15 +25,20 @@ public class XMLValidator {
 				.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Schema schema = null;
 		try {
-			schema = schemaFactory.newSchema(XMLValidator.class
-					.getResource("schema/schema1.xsd"));
+			schema = schemaFactory
+					.newSchema(getStreamSourceOfSchema("tanspeicher.xsd"));
 		} catch (SAXException e) {
-			// ignore
+			e.printStackTrace();
 		}
 		validator = schema.newValidator();
 	}
 
 	public void validateXmlFile(File file) throws SAXException, IOException {
 		validator.validate(new StreamSource(file));
+	}
+
+	private StreamSource getStreamSourceOfSchema(String schemaName) {
+		return new StreamSource(this.getClass().getResourceAsStream(
+				"/" + schemaName));
 	}
 }
