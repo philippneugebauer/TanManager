@@ -11,24 +11,19 @@ import javax.swing.JMenuItem;
  * Copyright (c) 2014 Philipp Neugebauer
  */
 public class FileChooser extends JFileChooser {
-	private static final long serialVersionUID = 1L;
-	int choice = 0;
-	JFileChooser fileChooser = new JFileChooser();
-	File toLoad = null;
+    private static final long serialVersionUID = 1L;
 
-	public FileChooser() {
-	}
+    public FileChooser() {
+        super();
+        this.setMultiSelectionEnabled(false);
+        this.setAcceptAllFileFilterUsed(true);
+    }
 
-	public File chooseFile(JMenuItem load) {
-		choice = fileChooser.showOpenDialog(load);
-		fileChooser.setDialogTitle("Bitte wählen Sie eine Datei aus");
-
-		if (choice == JFileChooser.APPROVE_OPTION) {
-			toLoad = fileChooser.getSelectedFile();
-		}
-
-		return toLoad;
-
-	}
-
+    public File chooseFile(JMenuItem load) {
+        setDialogTitle("Bitte wählen Sie eine Datei aus");
+        if (showOpenDialog(load) == APPROVE_OPTION) {
+            return getSelectedFile();
+        }
+        return null;
+    }
 }
