@@ -12,28 +12,28 @@ import java.util.ArrayList;
  * Copyright (c) 2014 Philipp Neugebauer
  */
 public class TextReader {
-	BufferedReader reader = null;
-	ArrayList<String> textStorage = new ArrayList<String>();
+    BufferedReader reader;
+    ArrayList<String> textStorage = new ArrayList<String>();
 
-	public ArrayList<String> readFile(File file) throws IOException {
-		textStorage.clear();
-		reader = new BufferedReader(new FileReader(file));
-		String lineStorage = null;
-		while ((lineStorage = reader.readLine()) != null) {
-			boolean isNumber = false;
-			try {
-				lineStorage = lineStorage.trim();
-				Long.parseLong(lineStorage);
-				isNumber = true;
-			} catch (NumberFormatException e) {
-				isNumber = false;
-			} finally {
-				if (isNumber == true) {
-					textStorage.add(lineStorage);
-				}
-			}
-		}
-		reader.close();
-		return textStorage;
-	}
+    public ArrayList<String> readFile(File file) throws IOException {
+        textStorage.clear();
+        reader = new BufferedReader(new FileReader(file));
+        String lineStorage;
+        while ((lineStorage = reader.readLine()) != null) {
+            boolean isNumber = false;
+            try {
+                lineStorage = lineStorage.trim();
+                Long.parseLong(lineStorage);
+                isNumber = true;
+            } catch (NumberFormatException e) {
+                isNumber = false;
+            } finally {
+                if (isNumber == true) {
+                    textStorage.add(lineStorage);
+                }
+            }
+        }
+        reader.close();
+        return textStorage;
+    }
 }

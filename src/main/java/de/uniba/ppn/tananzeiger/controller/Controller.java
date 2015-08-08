@@ -17,10 +17,10 @@ import de.uniba.ppn.tananzeiger.model.Model;
  * Copyright (c) 2014 Philipp Neugebauer
  */
 public class Controller {
-	private File file = null;
-	private View view = null;
-	private FileChooser chooser = null;
-	private Model model = null;
+    private File file;
+    private View view;
+    private FileChooser chooser;
+    private Model model;
 
 	public Controller() {
 		this.file = getOS();
