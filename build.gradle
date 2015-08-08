@@ -10,5 +10,8 @@ jar {
     manifest {
         attributes 'Main-Class': 'de.uniba.ppn.tananzeiger.Main'
     }
-    baseName = 'tananzeiger'
+    baseName = 'tanmanager'
 }
+
+mainClassName = "de.uniba.ppn.tananzeiger.Main"
+
