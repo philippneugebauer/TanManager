@@ -1,4 +1,4 @@
-Tan-Anzeiger
+TanManager
 ============
 
 Project for simplifying the bureaucracy stuff at university.
